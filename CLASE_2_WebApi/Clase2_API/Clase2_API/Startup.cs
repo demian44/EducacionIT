@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Clase2_API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,10 +28,16 @@ namespace Clase2_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddDbContext<ApplicationDBContext>
+                (options => options.UseInMemoryDatabase("DB"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env,
+            ApplicationDBContext contexto)
         {
             if (env.IsDevelopment())
             {
@@ -43,6 +51,18 @@ namespace Clase2_API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            if (!contexto.Amigos.Any())
+            {
+                contexto.Amigos.AddRange(new List<Amigo>()
+                {
+                    new Amigo(){ID=1,Apellido="Montenegro",Nombre="Teresita"},
+                    new Amigo(){ID=2,Apellido="Gallego",Nombre="Cristina"},
+                    new Amigo(){ID=3,Apellido="Guarnes",Nombre="Guillermo"},
+                });
+                contexto.SaveChanges(); // guardo registros
+            }
+
         }
     }
 }
