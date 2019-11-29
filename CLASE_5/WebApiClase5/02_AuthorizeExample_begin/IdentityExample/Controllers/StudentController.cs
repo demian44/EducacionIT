@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using IdentityExample.Data;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +19,7 @@ namespace IdentityExample.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
             return View();
         }
