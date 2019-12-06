@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProductsWebsite.Repositories;
+using System.Linq;
 
 namespace ProductsWebsite.Controllers
 {
@@ -25,7 +22,7 @@ namespace ProductsWebsite.Controllers
         public IActionResult GetProduct(int id)
         {
             var products = _repository.GetProducts();
-            var product = products.Where(p => p.Id != id).FirstOrDefault();
+            var product = products.Where(p => p.Id == id).FirstOrDefault();
             return View(product);
         }
 
