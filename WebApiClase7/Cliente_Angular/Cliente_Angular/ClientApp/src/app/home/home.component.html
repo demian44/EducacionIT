@@ -1,0 +1,23 @@
+<h1>Lista de Amigos</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!amigos"><em>Loading...</em></p>
+
+<table class='table table-striped' *ngIf="amigos">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Apellido</th>
+      <th>Nombre</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let amigo of amigos">
+      <td>{{ amigo.id }}</td>
+      <td>{{ amigo.apellido }}</td>
+      <td>{{ amigo.nombre }}</td>
+    </tr>
+  </tbody>
+</table>
