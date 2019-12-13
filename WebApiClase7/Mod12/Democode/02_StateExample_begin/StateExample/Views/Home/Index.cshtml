@@ -1,0 +1,12 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home";
+}
+
+<div class="info-panel">
+    <div>Visitas a Home durante la sesion: @Context.Session.GetInt32("Home")</div>
+    <div>Visitas a Another durante la sesion:: @Context.Session.GetInt32("Another")</div>
+    <div>Visitas Totales: @Context.Session.GetInt32("Overall")</div>
+</div>
+
